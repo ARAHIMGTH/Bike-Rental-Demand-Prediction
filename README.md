@@ -1,3 +1,11 @@
+#CONTRIBUTERS
+@ FARHAN ZAFAR
+@ MD KATIB 
+@ MD SAMAR ALAM
+@ ABDUR RAHIM 
+
+
+
 #LIVE DEMO
 https://bike-rental-demand-predict.streamlit.app/
 # 🚴 RidePredict – Bike Rental Demand Prediction

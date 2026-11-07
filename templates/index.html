@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RidePredict | Bike Rental Demand Prediction</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <div class="container">
+
+        <nav class="navbar">
+
+            <div class="logo">
+                <div class="logo-icon">🚲</div>
+
+                <div>
+                    <h2>Ride<span>Predict</span></h2>
+                    <p>AI POWERED ANALYTICS</p>
+                </div>
+            </div>
+
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                ML Model Active
+            </div>
+
+        </nav>
+
+
+        <header class="hero">
+
+            <div class="hero-tag">✦ MACHINE LEARNING PROJECT</div>
+
+            <h1>
+                Bike Rental Demand
+                <span>Prediction</span>
+            </h1>
+
+            <p>
+                Predict bike rental demand using weather conditions,
+                time information and machine learning.
+            </p>
+
+        </header>
+
+
+        <section class="stats-grid">
+
+            <div class="glass-card stat-card">
+                <div class="stat-icon">🤖</div>
+                <p>ML Algorithm</p>
+                <h3>Extra Trees</h3>
+                <span>Ensemble Learning</span>
+            </div>
+
+            <div class="glass-card stat-card">
+                <div class="stat-icon">📊</div>
+                <p>Model R² Score</p>
+                <h3>71.63%</h3>
+                <span>Previously reported result</span>
+            </div>
+
+            <div class="glass-card stat-card">
+                <div class="stat-icon">🎯</div>
+                <p>Mean Absolute Error</p>
+                <h3>190.47</h3>
+                <span>Previously reported result</span>
+            </div>
+
+            <div class="glass-card stat-card">
+                <div class="stat-icon">⚡</div>
+                <p>Prediction System</p>
+                <h3>Real-time</h3>
+                <span>Flask + Python</span>
+            </div>
+
+        </section>
+
+
+        <main class="dashboard-grid">
+
+            <section class="glass-card prediction-card">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">PREDICTION ENGINE</span>
+                        <h2>Enter Ride Conditions</h2>
+                        <p>Adjust the sliders and enter ride conditions.</p>
+                    </div>
+
+                    <div class="heading-icon">⚙️</div>
+
+                </div>
+
+
+                <form id="predictionForm">
+
+                    <div class="form-section">
+
+                        <h3>🕒 Time Information</h3>
+
+                        <div class="form-grid">
+
+                            <div class="input-group">
+                                <label for="hour">Hour (0–23)</label>
+                                <input type="number" id="hour"
+                                       min="0" max="23" value="8" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="month">Month (1–12)</label>
+                                <input type="number" id="month"
+                                       min="1" max="12" value="6" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="day">Day (1–31)</label>
+                                <input type="number" id="day"
+                                       min="1" max="31" value="15" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="day_of_week">Day of Week</label>
+
+                                <select id="day_of_week" required>
+                                    <option value="0">Monday</option>
+                                    <option value="1">Tuesday</option>
+                                    <option value="2">Wednesday</option>
+                                    <option value="3">Thursday</option>
+                                    <option value="4">Friday</option>
+                                    <option value="5">Saturday</option>
+                                    <option value="6">Sunday</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="season">Season</label>
+
+                                <select id="season" required>
+                                    <option value="Spring">Spring</option>
+                                    <option value="Summer">Summer</option>
+                                    <option value="Autumn">Autumn</option>
+                                    <option value="Winter">Winter</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="holiday">Holiday</label>
+
+                                <select id="holiday" required>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-section">
+
+                        <h3>🌤️ Weather Conditions</h3>
+
+                        <div class="form-grid">
+
+                            <div class="input-group range-group">
+                                <label>
+                                    Temperature:
+                                    <span id="temperatureValue">20</span> °C
+                                </label>
+
+                                <input type="range" id="temperature"
+                                       min="-17.8" max="39.4"
+                                       step="0.1" value="20">
+                            </div>
+
+
+                            <div class="input-group range-group">
+                                <label>
+                                    Humidity:
+                                    <span id="humidityValue">50</span> %
+                                </label>
+
+                                <input type="range" id="humidity"
+                                       min="0" max="100"
+                                       step="1" value="50">
+                            </div>
+
+
+                            <div class="input-group range-group">
+                                <label>
+                                    Wind Speed:
+                                    <span id="wind_speedValue">2</span> m/s
+                                </label>
+
+                                <input type="range" id="wind_speed"
+                                       min="0" max="7.4"
+                                       step="0.1" value="2">
+                            </div>
+
+
+                            <div class="input-group range-group">
+                                <label>
+                                    Visibility:
+                                    <span id="visibilityValue">1500</span>
+                                </label>
+
+                                <input type="range" id="visibility"
+                                       min="27" max="2000"
+                                       step="1" value="1500">
+                            </div>
+
+
+                            <div class="input-group range-group">
+                                <label>
+                                    Dew Point:
+                                    <span id="dew_pointValue">10</span> °C
+                                </label>
+
+                                <input type="range" id="dew_point"
+                                       min="-30.6" max="27.2"
+                                       step="0.1" value="10">
+                            </div>
+
+
+                            <div class="input-group range-group">
+                                <label>
+                                    Solar Radiation:
+                                    <span id="solar_radiationValue">0.5</span>
+                                </label>
+
+                                <input type="range" id="solar_radiation"
+                                       min="0" max="3.5"
+                                       step="0.01" value="0.5">
+                            </div>
+
+
+                            <div class="input-group range-group">
+                                <label>
+                                    Rainfall:
+                                    <span id="rainfallValue">0</span> mm
+                                </label>
+
+                                <input type="range" id="rainfall"
+                                       min="0" max="35"
+                                       step="0.1" value="0">
+                            </div>
+
+
+                            <div class="input-group range-group">
+                                <label>
+                                    Snowfall:
+                                    <span id="snowfallValue">0</span> cm
+                                </label>
+
+                                <input type="range" id="snowfall"
+                                       min="0" max="8.8"
+                                       step="0.1" value="0">
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-section">
+
+                        <h3>🚲 Operating Information</h3>
+
+                        <div class="form-grid">
+
+                            <div class="input-group">
+                                <label for="functioning_day">
+                                    Functioning Day
+                                </label>
+
+                                <select id="functioning_day" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <button type="submit" id="predictButton">
+
+                        <span id="buttonText">Generate Prediction</span>
+                        <span>→</span>
+
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <aside class="glass-card result-card">
+
+                <span class="section-label">PREDICTION RESULT</span>
+
+                <h2>Demand Overview</h2>
+
+                <div class="result-circle">
+
+                    <div>
+                        <span id="predictionValue">---</span>
+                        <p>Predicted Bikes</p>
+                    </div>
+
+                </div>
+
+                <div class="result-message" id="resultMessage">
+                    Enter your ride conditions to generate a prediction.
+                </div>
+
+                <div class="result-divider"></div>
+
+                <div class="result-info">
+
+                    <div>
+                        <span>Model</span>
+                        <strong>Extra Trees</strong>
+                    </div>
+
+                    <div>
+                        <span>Prediction Type</span>
+                        <strong>Bike Demand</strong>
+                    </div>
+
+                    <div>
+                        <span>Status</span>
+                        <strong id="predictionStatus">Waiting</strong>
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </main>
+
+
+        <section class="glass-card history-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">RECENT ACTIVITY</span>
+                    <h2>Prediction History</h2>
+                    <p>Your latest predictions.</p>
+                </div>
+            </div>
+
+            <div id="historyList" class="history-list">
+                <p class="empty-history">No predictions yet.</p>
+            </div>
+
+        </section>
+
+
+        <section class="glass-card analytics-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">MODEL ANALYTICS</span>
+                    <h2>Performance & Insights</h2>
+                    <p>Visual representation of model performance.</p>
+                </div>
+            </div>
+
+            <div class="analytics-grid">
+
+                <div class="chart-box">
+                    <h3>Actual vs Predicted</h3>
+
+                    <img
+                        src="{{ url_for('static', filename='actual_vs_predicted.png') }}"
+                        alt="Actual vs Predicted Graph">
+                </div>
+
+                <div class="chart-box">
+                    <h3>Feature Importance</h3>
+
+                    <img
+                        src="{{ url_for('static', filename='feature_importance.png') }}"
+                        alt="Feature Importance Graph">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            <h3>RidePredict</h3>
+
+            <p>
+                Bike Rental Demand Prediction using Machine Learning
+            </p>
+
+            <span>Developed for Academic Project</span>
+        </footer>
+
+    </div>
+
+
+    <!-- IMPORTANT: JavaScript is loaded as a separate file -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
